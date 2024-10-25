@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Seed Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240723/pngtree-testing-of-pesticides-on-plants-image_15911273.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 0;
+            margin: 0;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: rgb(16, 13, 13);
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        h3 {
+            margin-top: 40px;
+            color: #ff6600;
+        }
+        .menu-item {
+            background-color: orange;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+        }
+        .menu-item span {
+            font-weight: bold;
+        }
+        .menu-item button {
+            background-color: white;
+            color: orange;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .menu-item button:hover {
+            background-color: #f0f0f0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+            padding: 10px 15px;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .total-container {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .total-container span {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .section {
+            display: none;
+        }
+    </style>
+    <div class="navbar">
+        <a href="file:///C:/Users/Lenovo/Desktop/web%20project/index.html">Home</a>
+        <a href="file:///C:/Users/Lenovo/Desktop/web%20project/seed.html">Seeds</a>
+        <a href="file:///C:/Users/Lenovo/Desktop/web%20project/pesticide.html">Pesticides</a>
+        <a href="file:///C:/Users/Lenovo/Desktop/web%20project/about%20us.html">About us</a>
+        <a href="file:///C:/Users/Lenovo/Desktop/web%20project/faq.html">FAQ</a>
+        <a href="file:///C:/Users/Lenovo/Desktop/web%20project/order.html">Order Now</a>
+    </div>
+    <script>
+        let cartTotal = 0;
+
+        function addToCart(price) {
+            cartTotal += price;
+            document.getElementById('totalAmount').innerText = "Total Amount: INR " + cartTotal;
+        }
+
+        function showItems() {
+            // Hide all sections
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.style.display = 'none');
+
+            // Get selected value and show corresponding section
+            let selectedValue = document.getElementById('items').value;
+            document.getElementById(selectedValue).style.display = 'block';
+        }
+
+        function submitForm(e) {
+            e.preventDefault();
+            
+            // Collect data from the form
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('orderDetails').value;
+
+            const orderData = {
+                name,
+                email,
+                phone,
+                address,
+                items, // You can collect selected items if needed
+                totalAmount: cartTotal
+            };
+
+            // Send order data to the backend
+            fetch('http://localhost:5000/api/orders', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderData), 
+})
+
+
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert("Your order has been placed! Total Amount: INR " + cartTotal);
+                // Reset the form or perform any other actions as needed
+                document.getElementById('bookingForm').reset();
+                cartTotal = 0;
+                document.getElementById('totalAmount').innerText = "Total Amount: INR 0";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert("There was an error placing your order.");
+            });
+        }
+    </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Online Seed & Pesticide Booking</h2>
+
+    <!-- Booking Form -->
+    <form id="bookingForm" onsubmit="submitForm(event)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone No</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="items">Select Category:</label>
+            <select id="items" onchange="showItems()" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="vegetable-seeds">Vegetable Seeds</option>
+                <option value="fruit-seeds">Fruit Seeds</option>
+                <option value="herb-seeds">Herb Seeds</option>
+                <option value="flower-seeds">Flower Seeds</option>
+                <option value="herbicides">Herbicides</option>
+                <option value="fungicides">Fungicides</option>
+                <option value="insecticides">Insecticides</option>
+            </select>
+        </div>
+
+        <!-- Order Details -->
+        <div class="form-group">
+            <label for="orderDetails">Address</label>
+            <textarea id="orderDetails" name="orderDetails" rows="4" placeholder="where to deliver item" required></textarea>
+        </div>
+
+        <!-- Total Price Calculation -->
+        <div class="total-container">
+            <span id="totalAmount">Total Amount: INR 0</span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Place Order">
+        </div>
+    </form>
+
+    <!-- Seeds & Pesticides Sections (hidden initially) -->
+    <div id="vegetable-seeds" class="section">
+        <h3>Vegetable Seeds</h3>
+        <div class="menu-item"><span>Tomato Seeds</span><span>INR 150.00</span><button onclick="addToCart(150)">Add to Cart</button></div>
+        <div class="menu-item"><span>Cucumber Seeds</span><span>INR 120.00</span><button onclick="addToCart(120)">Add to Cart</button></div>
+        <div class="menu-item"><span>Carrot Seeds</span><span>INR 180.00</span><button onclick="addToCart(180)">Add to Cart</button></div>
+        <div class="menu-item"><span>Spinach Seeds</span><span>INR 100.00</span><button onclick="addToCart(100)">Add to Cart</button></div>
+    </div>
+
+    <div id="fruit-seeds" class="section">
+        <h3>Fruit Seeds</h3>
+        <div class="menu-item"><span>Mango Seeds</span><span>INR 200.00</span><button onclick="addToCart(200)">Add to Cart</button></div>
+        <div class="menu-item"><span>Watermelon Seeds</span><span>INR 250.00</span><button onclick="addToCart(250)">Add to Cart</button></div>
+        <div class="menu-item"><span>Papaya Seeds</span><span>INR 180.00</span><button onclick="addToCart(180)">Add to Cart</button></div>
+        <div class="menu-item"><span>Grapes Seeds</span><span>INR 220.00</span><button onclick="addToCart(220)">Add to Cart</button></div>
+    </div>
+
+    <div id="herb-seeds" class="section">
+        <h3>Herb Seeds</h3>
+        <div class="menu-item"><span>Basil Seeds</span><span>INR 160.00</span><button onclick="addToCart(160)">Add to Cart</button></div>
+        <div class="menu-item"><span>Parsley Seeds</span><span>INR 140.00</span><button onclick="addToCart(140)">Add to Cart</button></div>
+        <div class="menu-item"><span>Mint Seeds</span><span>INR 150.00</span><button onclick="addToCart(150)">Add to Cart</button></div>
+    </div>
+
+    <div id="flower-seeds" class="section">
+        <h3>Flower Seeds</h3>
+        <div class="menu-item"><span>Rose Seeds</span><span>INR 180.00</span><button onclick="addToCart(180)">Add to Cart</button></div>
+        <div class="menu-item"><span>Tulip Seeds</span><span>INR 210.00</span><button onclick="addToCart(210)">Add to Cart</button></div>
+    </div>
+
+    <div id="herbicides" class="section">
+        <h3>Herbicides</h3>
+        <div class="menu-item"><span>Herbicide A</span><span>INR 600.00</span><button onclick="addToCart(600)">Add to Cart</button></div>
+        <div class="menu-item"><span>Herbicide B</span><span>INR 500.00</span><button onclick="addToCart(500)">Add to Cart</button></div>
+    </div>
+
+    <div id="fungicides" class="section">
+        <h3>Fungicides</h3>
+        <div class="menu-item"><span>Fungicide A</span><span>INR 700.00</span><button onclick="addToCart(700)">Add to Cart</button></div>
+        <div class="menu-item"><span>Fungicide B</span><span>INR 650.00</span><button onclick="addToCart(650)">Add to Cart</button></div>
+    </div>
+
+    <div id="insecticides" class="section">
+        <h3>Insecticides</h3>
+        <div class="menu-item"><span>Insecticide A</span><span>INR 800.00</span><button onclick="addToCart(800)">Add to Cart</button></div>
+        <div class="menu-item"><span>Insecticide B</span><span>INR 750.00</span><button onclick="addToCart(750)">Add to Cart</button></div>
+    </div>
+
+  </div>
+</body>
+</html>

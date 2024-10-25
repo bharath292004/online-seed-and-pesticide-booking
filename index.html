@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Seed & Pesticide Booking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #000;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 15px 20px;
+        }
+
+        nav .logo {
+            color: #ffc107;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav .menu {
+            display: flex;
+            list-style: none;
+        }
+
+        nav .menu li {
+            margin-left: 20px;
+        }
+
+        nav .menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav .menu li a:hover {
+            color: #ffc107;
+        }
+
+        .banner {
+            position: relative;
+            background-image: url('https://www.shutterstock.com/image-photo/spraying-pesticides-vegetable-pepper-plant-260nw-2489294787.jpg'); /* Replace with actual image path */
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .banner .content {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+        }
+
+        .banner .content h1 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .banner .content p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .banner .content .btn {
+            background-color: #ffc107;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .banner .content .btn:hover {
+            background-color: #ff9800;
+        }
+
+        .services {
+            display: flex;
+            justify-content: space-around;
+            background-color: #222;
+            padding: 40px 0;
+            color: white;
+        }
+
+        .services .service-item {
+            text-align: center;
+            width: 30%;
+        }
+
+        .services .service-item h3 {
+            font-size: 24px;
+            color: #ffc107;
+        }
+
+        .services .service-item p {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        /* Featured Section for Seeds & Pesticides */
+        .featured {
+            padding: 50px 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .featured h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .featured .items {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .featured .item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .featured .item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .featured .item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .featured .item p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        .featured .item .btn {
+            background-color: #ffc107;
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .featured .item .btn:hover {
+            background-color: #ff9800;
+        }
+
+        /* Footer section */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        footer .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer .footer-column {
+            width: 24%;
+            margin-bottom: 20px;
+        }
+
+        footer .footer-column h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        footer .footer-column p, footer .footer-column a {
+            color: #ccc;
+            font-size: 14px;
+            text-decoration: none;
+            line-height: 24px;
+        }
+
+        footer .footer-column a:hover {
+            color: #ffc107;
+        }
+
+        footer .newsletter {
+            text-align: left;
+        }
+
+        footer .newsletter input {
+            padding: 10px;
+            width: 80%;
+            border: none;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        footer .newsletter button {
+            background-color: #ffc107;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer .newsletter button:hover {
+            background-color: #ff9800;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+       <h2> Online Seed & Pesticide Booking</h2>
+    </header>
+
+    <nav>
+        <div class="logo">SeedBook</div>
+        <ul class="menu">
+            <li><a href="file:///C:/Users/Lenovo/Desktop/web%20project/index.html">Home</a></li>
+            <li><a href="file:///C:/Users/Lenovo/Desktop/web%20project/seed.html">Seeds</a></li>
+            <li><a href="file:///C:/Users/Lenovo/Desktop/web%20project/pesticide.html">Pesticides</a></li>
+            <li><a href="file:///C:/Users/Lenovo/Desktop/web%20project/about%20us.html">About us</a></li>
+            <li><a href="file:///C:/Users/Lenovo/Desktop/web%20project/faq.html">FAQ</a></li>
+            <li><a href="file:///C:/Users/Lenovo/Desktop/web%20project/order.html">Order Now</a></li>
+        </ul>
+    </nav>
+
+    <div class="banner">
+        <div class="content"> 
+            <h1>Best Quality Seeds & Pesticides</h1>
+            <p>Order now and get the best agricultural products delivered to your door!</p>
+            <a href="file:///C:/Users/Lenovo/Desktop/web%20project/order.html" class="btn">Order Now</a>
+        </div>
+    </div>
+
+    <section class="services">
+        <div class="service-item">
+            <h3>Quality Seeds</h3>
+            <p>We offer a wide range of seeds for all your agricultural needs.</p>
+        </div>
+        <div class="service-item">
+            <h3>Effective Pesticides</h3>
+            <p>Protect your crops with our premium pesticides.</p>
+        </div>
+        <div class="service-item">
+            <h3>Direct Delivery</h3>
+            <p>Get products delivered straight to your doorstep.</p>
+        </div>
+    </section>
+
+    <!-- New Featured Section -->
+    <section class="featured">
+        <h2>Our Featured Seeds & Pesticides</h2>
+        <div class="items">
+            <div class="item">
+                <img src="https://m.media-amazon.com/images/I/61i8Mcjoq9L._AC_UF1000,1000_QL80_.jpg" alt="Featured Seed 1">
+                <h3>Premium Tomato Seeds</h3>
+                <p>High-yield seeds for better farming.</p>
+                <a href="file:///C:/Users/Lenovo/Desktop/web%20project/order.html" class="btn">Order Now</a>
+            </div>
+            <div class="item">
+                <img src="https://5.imimg.com/data5/SELLER/Default/2023/8/335947978/GR/KG/VR/183091867/organic-pesticides.jpg" alt="Featured Pesticide 1">
+                <h3>Organic Pesticides</h3>
+                <p>Keep your crops healthy with organic solutions.</p>
+                <a href="file:///C:/Users/Lenovo/Desktop/web%20project/order.html" class="btn">Order Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Help Center</h3>
+                <p><a href="#">FAQs</a></p>
+                <p><a href="#">Customer Support</a></p>
+                <p><a href="#">Return Policy</a></p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <p><a href="#">Home</a></p>
+                <p><a href="#">Seeds</a></p>
+                <p><a href="#">Pesticides</a></p>
+            </div>
+            <div class="footer-column newsletter">
+                <h3>Newsletter</h3>
+                <p>Sign up for exclusive updates:</p>
+                <input type="email" placeholder="Your email">
+                <button>Subscribe</button>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p>Phone: 123-456-7890</p>
+                <p>Email: info@seedbook.com</p>
+                <p>Address: 1234 Farm Lane, Agro City</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
